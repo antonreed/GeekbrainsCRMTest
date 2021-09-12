@@ -5,10 +5,10 @@ import com.antonreed.CreateContact.CreateContactPage;
 import com.antonreed.CreateProject.CreateProjectPage;
 import com.antonreed.CreateProject.MyProjectsPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +28,7 @@ public class Main {
     public static WebDriver driver;
     public static WebDriverWait wait;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -47,7 +47,7 @@ public class Main {
                 .inputPassword(ConfProperties.getProperty("password"))
                 .clickLoginButton();
 
-        Assert.assertEquals(navMenuElements.getPageTitle(), driver.getTitle());
+        Assertions.assertEquals(navMenuElements.getPageTitle(), driver.getTitle());
     }
 
     @Test
@@ -58,11 +58,11 @@ public class Main {
         navMenuElements.clickContactsLink();
 
         wait.until(ExpectedConditions.titleIs(contactsPage.getPageTitle()));
-        Assert.assertEquals(contactsPage.getPageTitle(), driver.getTitle());
+        Assertions.assertEquals(contactsPage.getPageTitle(), driver.getTitle());
 
         contactsPage.clickCreateContactButton();
         wait.until(ExpectedConditions.titleIs(createContactPage.getPageTitle()));
-        Assert.assertEquals(createContactPage.getPageTitle(), driver.getTitle());
+        Assertions.assertEquals(createContactPage.getPageTitle(), driver.getTitle());
 
         createContactPage
                 .inputLastName(ConfProperties.getProperty("newContactLastName"))
@@ -71,9 +71,9 @@ public class Main {
                 .inputPosition(ConfProperties.getProperty("contactPosition"))
                 .clickSubmitButton();
         wait.until(ExpectedConditions.titleIs(ConfProperties.getProperty("pageTitleAfterCreatingContact")));
-        Assert.assertEquals(contactsPage.getPageTitle(), driver.getTitle());
+        Assertions.assertEquals(contactsPage.getPageTitle(), driver.getTitle());
 
-        Assert.assertEquals(ConfProperties.getProperty("contactPositiveMessage"), driver.findElement(By.
+        Assertions.assertEquals(ConfProperties.getProperty("contactPositiveMessage"), driver.findElement(By.
                 cssSelector(".message")).getText());
     }
 
@@ -84,11 +84,11 @@ public class Main {
 
         navMenuElements.clickMyProjectsLink();
         wait.until(ExpectedConditions.titleIs(myProjectsPage.getPageTitle()));
-        Assert.assertEquals(myProjectsPage.getPageTitle(), driver.getTitle());
+        Assertions.assertEquals(myProjectsPage.getPageTitle(), driver.getTitle());
 
         myProjectsPage.clickCreateProjectButton();
         wait.until(ExpectedConditions.titleIs(createProjectPage.getPageTitle()));
-        Assert.assertEquals(createProjectPage.getPageTitle(), driver.getTitle());
+        Assertions.assertEquals(createProjectPage.getPageTitle(), driver.getTitle());
 
         createProjectPage
                 .inputProjectName(ConfProperties.getProperty("projectName"))
@@ -101,13 +101,13 @@ public class Main {
                 .selectContactMain(ConfProperties.getProperty("contactMain"))
                 .clickSubmitButton();
         wait.until(ExpectedConditions.titleIs(ConfProperties.getProperty("pageTitleAfterCreatingProject")));
-        Assert.assertEquals(ConfProperties.getProperty("pageTitleAfterCreatingProject"), driver.getTitle());
+        Assertions.assertEquals(ConfProperties.getProperty("pageTitleAfterCreatingProject"), driver.getTitle());
 
-        Assert.assertEquals(ConfProperties.getProperty("projectPositiveMessage"), driver.findElement(By.
+        Assertions.assertEquals(ConfProperties.getProperty("projectPositiveMessage"), driver.findElement(By.
                 cssSelector(".message")).getText());
     }
 
-    @AfterClass
+    @AfterAll
     public static void endOfTests() {
         driver.quit();
     }
