@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Objects;
-
 public class CreateContactPage {
     private WebDriver driver;
 
@@ -38,19 +36,22 @@ public class CreateContactPage {
     private WebElement submitButton;
 
 
-    public void inputLastName(String lastName) {
+    public CreateContactPage inputLastName(String lastName) {
         this.lastName.sendKeys(lastName);
+        return this;
     }
 
-    public void inputFirstName(String firstName) {
+    public CreateContactPage inputFirstName(String firstName) {
         this.firstName.sendKeys(firstName);
+        return this;
     }
 
-    public void inputPosition(String position) {
+    public CreateContactPage inputPosition(String position) {
         this.position.sendKeys(position);
+        return this;
     }
 
-    public void selectOrganization(String organization) {
+    public CreateContactPage selectOrganization(String organization) {
         organizationSelect.click();
         this.organization.sendKeys(organization);
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -61,10 +62,12 @@ public class CreateContactPage {
 
         wait.until(ExpectedConditions.visibilityOf(selectedOrganization));
         selectedOrganization.click();
+        return this;
     }
 
-    public void clickSubmitButton() {
+    public CreateContactPage clickSubmitButton() {
         submitButton.click();
+        return this;
     }
 
     public String getPageTitle() {

@@ -16,8 +16,9 @@ public class ContactsPage {
     @FindBy(xpath = "//a[@title = \"Создать контактное лицо\"]")
     private WebElement createContactButton;
 
-    public void clickCreateContactButton() {
+    public ContactsPage clickCreateContactButton() {
         createContactButton.click();
+        return this;
     }
 
     public String getPageTitle() {

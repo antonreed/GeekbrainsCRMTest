@@ -16,8 +16,9 @@ public class MyProjectsPage {
     @FindBy(xpath = "//a[@title = \"Создать проект\"]")
     private WebElement createProjectButton;
 
-    public void clickCreateProjectButton() {
+    public MyProjectsPage clickCreateProjectButton() {
         createProjectButton.click();
+        return this;
     }
 
     public String getPageTitle() {

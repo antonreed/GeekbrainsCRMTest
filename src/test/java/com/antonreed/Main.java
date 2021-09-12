@@ -34,7 +34,6 @@ public class Main {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10, 100);
 
-        loginPage = new LoginPage(driver);
         navMenuElements = new NavMenuElements(driver);
 
         driver.manage().window().setSize(new Dimension(
@@ -43,9 +42,11 @@ public class Main {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("startPage"));
 
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
-        loginPage.inputPassword(ConfProperties.getProperty("password"));
-        loginPage.clickLoginButton();
+        new LoginPage(driver)
+                .inputLogin(ConfProperties.getProperty("login"))
+                .inputPassword(ConfProperties.getProperty("password"))
+                .clickLoginButton();
+
         Assert.assertEquals(navMenuElements.getPageTitle(), driver.getTitle());
     }
 
@@ -55,6 +56,7 @@ public class Main {
         createContactPage = new CreateContactPage(driver);
 
         navMenuElements.clickContactsLink();
+
         wait.until(ExpectedConditions.titleIs(contactsPage.getPageTitle()));
         Assert.assertEquals(contactsPage.getPageTitle(), driver.getTitle());
 
@@ -62,12 +64,12 @@ public class Main {
         wait.until(ExpectedConditions.titleIs(createContactPage.getPageTitle()));
         Assert.assertEquals(createContactPage.getPageTitle(), driver.getTitle());
 
-        createContactPage.inputLastName(ConfProperties.getProperty("newContactLastName"));
-        createContactPage.inputFirstName(ConfProperties.getProperty("newContactFirstName"));
-        createContactPage.selectOrganization(ConfProperties.getProperty("organization"));
-        createContactPage.inputPosition(ConfProperties.getProperty("contactPosition"));
-
-        createContactPage.clickSubmitButton();
+        createContactPage
+                .inputLastName(ConfProperties.getProperty("newContactLastName"))
+                .inputFirstName(ConfProperties.getProperty("newContactFirstName"))
+                .selectOrganization(ConfProperties.getProperty("organization"))
+                .inputPosition(ConfProperties.getProperty("contactPosition"))
+                .clickSubmitButton();
         wait.until(ExpectedConditions.titleIs(ConfProperties.getProperty("pageTitleAfterCreatingContact")));
         Assert.assertEquals(contactsPage.getPageTitle(), driver.getTitle());
 
@@ -88,16 +90,16 @@ public class Main {
         wait.until(ExpectedConditions.titleIs(createProjectPage.getPageTitle()));
         Assert.assertEquals(createProjectPage.getPageTitle(), driver.getTitle());
 
-        createProjectPage.inputProjectName(ConfProperties.getProperty("projectName"));
-        createProjectPage.selectOrganization(ConfProperties.getProperty("organization"));
-        createProjectPage.selectBusinessUnit(ConfProperties.getProperty("businessUnit"));
-        createProjectPage.selectCurator(ConfProperties.getProperty("curator"));
-        createProjectPage.selectRP(ConfProperties.getProperty("rp"));
-        createProjectPage.selectAdministratorUnit(ConfProperties.getProperty("administrator"));
-        createProjectPage.selectManagerUnit(ConfProperties.getProperty("manager"));
-        createProjectPage.selectContactMain(ConfProperties.getProperty("contactMain"));
-
-        createProjectPage.clickSubmitButton();
+        createProjectPage
+                .inputProjectName(ConfProperties.getProperty("projectName"))
+                .selectOrganization(ConfProperties.getProperty("organization"))
+                .selectBusinessUnit(ConfProperties.getProperty("businessUnit"))
+                .selectCurator(ConfProperties.getProperty("curator"))
+                .selectRP(ConfProperties.getProperty("rp"))
+                .selectAdministratorUnit(ConfProperties.getProperty("administrator"))
+                .selectManagerUnit(ConfProperties.getProperty("manager"))
+                .selectContactMain(ConfProperties.getProperty("contactMain"))
+                .clickSubmitButton();
         wait.until(ExpectedConditions.titleIs(ConfProperties.getProperty("pageTitleAfterCreatingProject")));
         Assert.assertEquals(ConfProperties.getProperty("pageTitleAfterCreatingProject"), driver.getTitle());
 

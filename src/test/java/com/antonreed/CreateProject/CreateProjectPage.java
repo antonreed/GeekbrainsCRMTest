@@ -32,11 +32,12 @@ public class CreateProjectPage {
     @FindBy(xpath = "//button[contains(text(), \"Сохранить и закрыть\")]")
     private WebElement submitButton;
 
-    public void inputProjectName(String organization) {
+    public CreateProjectPage inputProjectName(String organization) {
         projectName.sendKeys(organization);
+        return this;
     }
 
-    public void selectOrganization(String organization) {
+    public CreateProjectPage selectOrganization(String organization) {
         organizationSelect.click();
         this.organization.sendKeys(organization);
 
@@ -46,46 +47,54 @@ public class CreateProjectPage {
 
         wait.until(ExpectedConditions.visibilityOf(selectedOrganization));
         selectedOrganization.click();
+        return this;
     }
 
-    public void selectBusinessUnit(String businessUnit) {
+    public CreateProjectPage selectBusinessUnit(String businessUnit) {
         Select businessUnitSelect = new Select(driver.findElement(By
                 .xpath("//select[@name=\"crm_project[businessUnit]\"]")));
         businessUnitSelect.selectByVisibleText(businessUnit);
+        return this;
     }
 
-    public void selectCurator(String curator) {
+    public CreateProjectPage selectCurator(String curator) {
         Select curatorSelect = new Select(driver.findElement(By
                 .xpath("//select[@name=\"crm_project[curator]\"]")));
         curatorSelect.selectByVisibleText(curator);
+        return this;
     }
 
-    public void selectRP(String rp) {
+    public CreateProjectPage selectRP(String rp) {
         Select rpSelect = new Select(driver.findElement(By
                 .xpath("//select[@name=\"crm_project[rp]\"]")));
         rpSelect.selectByVisibleText(rp);
+        return this;
     }
 
-    public void selectAdministratorUnit(String administrator) {
+    public CreateProjectPage selectAdministratorUnit(String administrator) {
         Select administratorSelect = new Select(driver.findElement(By
                 .xpath("//select[@name=\"crm_project[administrator]\"]")));
         administratorSelect.selectByVisibleText(administrator);
+        return this;
     }
 
-    public void selectManagerUnit(String manager) {
+    public CreateProjectPage selectManagerUnit(String manager) {
         Select managerSelect = new Select(driver.findElement(By
                 .xpath("//select[@name=\"crm_project[manager]\"]")));
         managerSelect.selectByVisibleText(manager);
+        return this;
     }
 
-    public void selectContactMain(String contactMain) {
+    public CreateProjectPage selectContactMain(String contactMain) {
         Select contactMainSelect = new Select(driver.findElement(By
                 .xpath("//select[@name=\"crm_project[contactMain]\"]")));
         contactMainSelect.selectByVisibleText(contactMain);
+        return this;
     }
 
-    public void clickSubmitButton() {
+    public CreateProjectPage clickSubmitButton() {
         submitButton.click();
+        return this;
     }
 
     public String getPageTitle() {

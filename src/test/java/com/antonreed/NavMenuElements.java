@@ -28,12 +28,14 @@ public class NavMenuElements {
     @FindBy(xpath = "//a/span[contains(text(),'Мои проекты')]")
     private WebElement myProjects;
 
-    public void clickContactsLink() {
+    public NavMenuElements clickContactsLink() {
         actions.moveToElement(contragentsLink).moveToElement(contactsLink).click().build().perform();
+        return this;
     }
 
-    public void clickMyProjectsLink () {
+    public NavMenuElements clickMyProjectsLink () {
         actions.moveToElement(projects).moveToElement(myProjects).click().build().perform();
+        return this;
     }
 
     public String getPageTitle() {

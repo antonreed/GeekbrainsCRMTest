@@ -22,15 +22,18 @@ public class LoginPage {
     @FindBy(xpath = "//*[@id = \"_submit\"]")
     private WebElement loginButton;
 
-    public void inputLogin(String login) {
+    public LoginPage inputLogin(String login) {
         loginField.sendKeys(login);
+        return this;
     }
 
-    public void inputPassword(String password) {
+    public LoginPage inputPassword(String password) {
         passwordField.sendKeys(password);
+        return this;
     }
 
-    public void clickLoginButton() {
+    public LoginPage clickLoginButton() {
         loginButton.click();
+        return this;
     }
 }
